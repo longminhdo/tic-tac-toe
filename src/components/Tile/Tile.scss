@@ -1,0 +1,56 @@
+@import '@/assets/styles/global.scss';
+
+.tile {
+  border: toRem(2) solid $main-black-color;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:nth-child(-n + 3) {
+    border-top-width: toRem(4);
+  }
+
+  &:nth-child(3n) {
+    border-right-width: toRem(4);
+  }
+
+  &:nth-child(3n - 2) {
+    border-left-width: toRem(4);
+  }
+
+  &:nth-child(n + 7) {
+    border-bottom-width: toRem(4);
+  }
+
+  // TODO: winner strike css
+  &.f-cross-r {
+    &::after {
+      content: ' ';
+      width: 2px;
+      height: 140%;
+      transform: rotate(45deg);
+      position: absolute;
+      background-color: red;
+    }
+  }
+
+  .tile-content {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &.empty {
+      opacity: 0;
+
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+  }
+}

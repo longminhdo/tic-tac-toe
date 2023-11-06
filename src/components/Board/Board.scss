@@ -1,0 +1,9 @@
+@import '@/assets/styles/global.scss';
+
+.board {
+  display: grid;
+  height: 90vw;
+  width: 90vw;
+  max-width: toRem(480);
+  max-height: toRem(480);
+}

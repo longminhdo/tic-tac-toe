@@ -1,0 +1,9 @@
+@import '@/assets/styles/global.scss';
+
+.tic-tac-toe {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: toRem(100);
+  flex-direction: column;
+}

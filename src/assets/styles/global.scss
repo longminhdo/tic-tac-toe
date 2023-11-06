@@ -1,8 +1,32 @@
 @use 'sass:math';
 
 /********** COLOR **********/
+$black-color-1: #2b2b2b;
+
 $main-black-color: #0b0c0d;
 $main-white-color: white;
+
+$red-color-0: #fde8ed;
+$red-color-1: #e65061;
+$red-color-2: #be0f0f;
+
+$gray-color-0: #fafafa;
+$gray-color-0_5: #efefef;
+$gray-color-1: #d9dbdc;
+$gray-color-2: #b2b8b9;
+$gray-color-3: #707070;
+$gray-color-4: #3f4445;
+
+$orange-color-6: #fa8c16;
+
+$purple-color-0: rgb(225, 216, 241);
+$purple-color-1: rgb(103, 58, 183);
+
+$blue-color-1: #e6f7ff;
+$blue-color-2: #bae7ff;
+$blue-color-5: #40a9ff;
+$blue-color-6: #1890ff;
+$blue-color-7: #096dd9;
 
 /*********** RESPONSIVE ************/
 $max-content-width: 1300px;
