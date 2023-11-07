@@ -45,7 +45,7 @@ const renderWinnerStrikeClass = ({ position }) => {
 };
 
 const Tile: FunctionComponent<ITileProps> = ({ tile, position }) => {
-  const { turnIndex, setTiles, setTurnIndex } = useContext(TicTacToeContext);
+  const { turnIndex, setTiles, nextTurn } = useContext(TicTacToeContext);
 
   const handleTileClick = (e) => {
     e.preventDefault();
@@ -60,14 +60,14 @@ const Tile: FunctionComponent<ITileProps> = ({ tile, position }) => {
 
       if (turnIndex === Turn.FIRST) {
         newTiles[position] = Mark.CROSS;
-        setTurnIndex(Turn.SECOND);
       } else {
         newTiles[position] = Mark.NOUGHT;
-        setTurnIndex(Turn.FIRST);
       }
 
       return newTiles;
     });
+
+    nextTurn();
   };
 
   return (

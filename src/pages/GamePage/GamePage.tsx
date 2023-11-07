@@ -4,12 +4,13 @@ import './GamePage.scss';
 
 // TODO: Dynamic board game size
 
-const GamePage = () => {
+const GamePage: React.FC = () => {
   console.log('game page');
 
   return (
     <div className="game-page">
-      <TicTacToe size={3} winLength={3} />
+      <h1>Tic Tac Toe</h1>
+      <TicTacToe />
     </div>
   );
 };

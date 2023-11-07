@@ -17,3 +17,7 @@ export enum Turn {
   FIRST = 0,
   SECOND = 1,
 }
+
+export enum WinLength {
+  BASIC = 3,
+}

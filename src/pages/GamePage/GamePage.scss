@@ -1,2 +1,9 @@
+@import '@/assets/styles/global.scss';
+
 .game-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: toRem(100);
 }

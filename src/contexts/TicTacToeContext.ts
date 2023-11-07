@@ -1,13 +1,9 @@
 import { createContext } from 'react';
-import { GameSize, Player } from '@/constants/game';
-import { Game } from '@/types/ticTacToe';
+import { TicTacToe } from '@/types/ticTacToe';
 
-export const TicTacToeContext = createContext<Game>({
-  size: GameSize.BASIC,
-  players: [Player.PLAYER_1, Player.PLAYER_2],
+export const TicTacToeContext = createContext<TicTacToe>({
   tiles: [],
   turnIndex: 0,
   setTiles: () => undefined,
-  setPlayers: () => undefined,
-  setTurnIndex: () => undefined,
+  nextTurn: () => undefined,
 });
