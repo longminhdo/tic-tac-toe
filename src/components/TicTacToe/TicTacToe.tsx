@@ -14,22 +14,15 @@ const checkWinner = ({ tiles, winLength }) => {
 };
 
 const TicTacToe: FunctionComponent<TicTacToeProps> = ({ size, winLength }) => {
-  console.log('Tic tac toe');
-  const [tiles, setTiles] = useState(() => Array(size * size).fill(Mark.CROSS));
-  const [player, setPlayer] = useState(() => Player.PLAYER_1);
+  const [tiles, setTiles] = useState(() => Array(size * size).fill(null));
+  const [players, setPlayers] = useState(() => [Player.PLAYER_1, Player.PLAYER_2]);
+  const [turnIndex, setTurnIndex] = useState(0);
   // check winner after each move
 
-  useEffect(() => {
-    setTiles(prev => {
-      const newArr = [...prev];
-      newArr[2] = Mark.NOUGHT;
-      newArr[6] = null;
-
-      return newArr;
-    });
-  }, []);
-
-  const gameContextValue = useMemo(() => ({ size, tiles, player, setTiles, setPlayer }), [size, tiles, player]);
+  const gameContextValue = useMemo(
+    () => ({ size, tiles, players, turnIndex, setTiles, setPlayers, setTurnIndex }),
+    [size, tiles, players, turnIndex],
+  );
 
   return (
     <TicTacToeContext.Provider value={gameContextValue}>

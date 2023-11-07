@@ -1,6 +1,6 @@
 import { Circle, Cross } from 'akar-icons';
 import React, { FunctionComponent, useContext } from 'react';
-import { Mark, Player } from '@/constants/game';
+import { Mark, Turn } from '@/constants/game';
 import { TicTacToeContext } from '@/contexts/TicTacToeContext';
 import './Tile.scss';
 
@@ -9,7 +9,7 @@ export interface ITileProps {
   position: number;
 }
 
-const renderTileContent = ({ tile, player }) => {
+const renderTileContent = ({ tile, turnIndex }) => {
   if (tile === Mark.CROSS) {
     return (
       <div className="tile-content">
@@ -29,7 +29,7 @@ const renderTileContent = ({ tile, player }) => {
   return (
     <div className="tile-content empty">
       {
-        [Player.COMPUTER_1, Player.PLAYER_1].includes(player)
+        turnIndex === Turn.FIRST
           ? <Cross strokeWidth={2} size="80%" />
           : <Circle strokeWidth={2} size="80%" />
       }
@@ -45,11 +45,34 @@ const renderWinnerStrikeClass = ({ position }) => {
 };
 
 const Tile: FunctionComponent<ITileProps> = ({ tile, position }) => {
-  const { player } = useContext(TicTacToeContext);
+  const { turnIndex, setTiles, setTurnIndex } = useContext(TicTacToeContext);
+
+  const handleTileClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (tile) {
+      return;
+    }
+
+    setTiles(prev => {
+      const newTiles = [...prev];
+
+      if (turnIndex === Turn.FIRST) {
+        newTiles[position] = Mark.CROSS;
+        setTurnIndex(Turn.SECOND);
+      } else {
+        newTiles[position] = Mark.NOUGHT;
+        setTurnIndex(Turn.FIRST);
+      }
+
+      return newTiles;
+    });
+  };
 
   return (
-    <div className={`tile ${renderWinnerStrikeClass({ position })}`}>
-      {renderTileContent({ tile, player })}
+    <div className={`tile ${renderWinnerStrikeClass({ position })}`} onClick={handleTileClick}>
+      {renderTileContent({ tile, turnIndex })}
     </div>
   );
 };

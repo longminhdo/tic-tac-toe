@@ -1,8 +1,7 @@
 export enum Player {
   PLAYER_1 = 'player_1',
   PLAYER_2 = 'player_2',
-  COMPUTER_1 = 'computer_1',
-  COMPUTER_2 = 'computer_2',
+  COMPUTER = 'computer',
 }
 
 export enum GameSize {
@@ -12,4 +11,9 @@ export enum GameSize {
 export enum Mark {
   CROSS = 'cross',
   NOUGHT = 'nought',
+}
+
+export enum Turn {
+  FIRST = 0,
+  SECOND = 1,
 }

@@ -2,8 +2,10 @@ import { Player } from '@/constants/game';
 
 export interface Game {
   size: number;
-  player: Player;
+  players: Array<Player>;
+  turnIndex: number;
   tiles: Array<string | null>;
   setTiles: any;
-  setPlayer: any;
+  setPlayers: any;
+  setTurnIndex: any;
 }

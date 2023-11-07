@@ -4,8 +4,10 @@ import { Game } from '@/types/ticTacToe';
 
 export const TicTacToeContext = createContext<Game>({
   size: GameSize.BASIC,
-  player: Player.PLAYER_1,
+  players: [Player.PLAYER_1, Player.PLAYER_2],
   tiles: [],
+  turnIndex: 0,
   setTiles: () => undefined,
-  setPlayer: () => undefined,
+  setPlayers: () => undefined,
+  setTurnIndex: () => undefined,
 });
