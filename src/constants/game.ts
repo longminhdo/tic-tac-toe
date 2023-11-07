@@ -18,6 +18,12 @@ export enum Turn {
   SECOND = 1,
 }
 
-export enum WinLength {
+export enum WinCondition {
   BASIC = 3,
+}
+
+export enum Result {
+  WIN = 'win',
+  LOSE = 'lose',
+  DRAW = 'draw',
 }

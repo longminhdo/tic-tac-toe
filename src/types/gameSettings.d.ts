@@ -1,10 +1,10 @@
 import { Player } from '@/constants/game';
 
 export type GameSettings = {
-  winLength: number;
+  winCondition: number;
   size: number;
   players: Array<Player>;
   setPlayers: any;
-  setWinLength: any;
+  setWinCondition: any;
   setSize: any;
 };
