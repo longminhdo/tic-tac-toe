@@ -5,15 +5,6 @@ import { GameSettingsContext } from '@/contexts/GameSettingContext';
 import { TicTacToeContext } from '@/contexts/TicTacToeContext';
 import './Board.scss';
 
-const getGridTemplateColumns = (size) => {
-  let template = '';
-  for (let i = 0; i < size; i++) {
-    template += 'auto ';
-  }
-
-  return template.trim();
-};
-
 const Board: React.FC = () => {
   const { tiles } = useContext(TicTacToeContext);
   const { size } = useContext(GameSettingsContext);
