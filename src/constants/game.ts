@@ -6,6 +6,7 @@ export enum Player {
 
 export enum GameSize {
   BASIC = 3,
+  BIG = 20,
 }
 
 export enum Mark {
@@ -26,4 +27,9 @@ export enum Result {
   WIN = 'Win',
   LOSE = 'Lose',
   DRAW = 'Draw',
+}
+
+export enum GameMode {
+  PVP = 'Player x Player',
+  PVC = 'Player x Computer',
 }

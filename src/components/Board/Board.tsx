@@ -19,7 +19,7 @@ const Board: React.FC = () => {
   const { size } = useContext(GameSettingsContext);
 
   return (
-    <div className="board" style={{ gridTemplateColumns: getGridTemplateColumns(size) }}>
+    <div className="board" style={{ gridTemplateColumns: `repeat(${size}, minmax(0, 1fr))` }}>
       {tiles.map((t, i) => <Tile position={i} key={i} tile={t} />)}
     </div>
   );

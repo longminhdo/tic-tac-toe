@@ -1,10 +1,8 @@
 import { Circle, Cross } from 'akar-icons';
-import React, { FunctionComponent, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Mark, Turn } from '@/constants/game';
 import { TicTacToeContext } from '@/contexts/TicTacToeContext';
 import './Tile.scss';
-import { GameSettingsContext } from '@/contexts/GameSettingContext';
-import { checkWinner } from '@/utils/gameUtils';
 
 export interface ITileProps {
   tile: string | null;
@@ -46,7 +44,7 @@ const renderWinnerStrikeClass = ({ position }) => {
   return strikeClass;
 };
 
-const Tile: FunctionComponent<ITileProps> = ({ tile, position }) => {
+const Tile: React.FC<ITileProps> = ({ tile, position }) => {
   const { turnIndex, setTiles, nextTurn, setLastPosition } = useContext(TicTacToeContext);
 
   const handleTileClick = (e) => {
@@ -57,19 +55,17 @@ const Tile: FunctionComponent<ITileProps> = ({ tile, position }) => {
       return;
     }
 
-    setTimeout(() => {
-      setTiles(prev => {
-        const newTiles = [...prev];
+    setTiles(prev => {
+      const newTiles = [...prev];
 
-        if (turnIndex === Turn.FIRST) {
-          newTiles[position] = Mark.CROSS;
-        } else {
-          newTiles[position] = Mark.NOUGHT;
-        }
+      if (turnIndex === Turn.FIRST) {
+        newTiles[position] = Mark.CROSS;
+      } else {
+        newTiles[position] = Mark.NOUGHT;
+      }
 
-        return newTiles;
-      });
-    }, 0);
+      return newTiles;
+    });
     setLastPosition(position);
     nextTurn();
   };

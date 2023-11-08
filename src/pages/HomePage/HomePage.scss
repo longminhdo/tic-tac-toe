@@ -1,10 +1,49 @@
 @import '@/assets/styles/global.scss';
 
 .home-page {
-  padding-top: $safe-margin-top-height;
+  padding-top: toRem(60);
   height: $screen-height;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  gap: toRem(80);
+
+  .page-header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    h1 {
+      font-size: toRem(46);
+    }
+  }
+
+  .page-body {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: toRem(48);
+  }
+
+  .preview {
+    width: 60%;
+    max-width: 25vh;
+    @include select-restricted;
+    height: 25vh;
+  }
+
+  @include mobile {
+    padding-top: $safe-margin-top-height;
+    gap: toRem(48);
+
+    .page-header {
+      h1 {
+        font-size: toRem(36);
+      }
+    }
+  }
 }

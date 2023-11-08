@@ -6,4 +6,7 @@
   width: 90vw;
   max-width: toRem(480);
   max-height: toRem(480);
+  grid-auto-rows: 1fr;
+
+  @include select-restricted;
 }

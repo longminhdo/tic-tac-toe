@@ -8,6 +8,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  user-select: none !important;
+  -webkit-tap-highlight-color: transparent; /* iOS Safari */
 
   &:nth-child(-n + 3) {
     border-top-width: toRem(4);
@@ -50,6 +52,18 @@
 
       &:hover {
         opacity: 0.4;
+      }
+    }
+  }
+
+  @include mobile {
+    .tile-content {
+      &.empty {
+        opacity: 0;
+
+        &:hover {
+          opacity: 0;
+        }
       }
     }
   }

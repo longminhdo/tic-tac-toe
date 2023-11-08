@@ -1,0 +1,30 @@
+@import '@/assets/styles/global.scss';
+
+.game-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: toRem(12);
+  width: 100%;
+
+  .game-actions-btn {
+    background-color: $gray-color-2;
+    color: $main-white-color;
+    border-radius: toRem(8);
+    padding: toRem(8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    @include hover-shadow;
+    @include select-restricted;
+  }
+
+  @include mobile {
+    gap: toRem(8);
+    .game-actions-btn {
+      border-radius: toRem(6);
+      padding: toRem(6);
+    }
+  }
+}

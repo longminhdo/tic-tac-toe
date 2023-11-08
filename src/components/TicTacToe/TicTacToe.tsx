@@ -1,6 +1,7 @@
 import { isEqual } from 'lodash';
 import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import Board from '@/components/Board/Board';
+import GameActions from '@/components/GameActions/GameActions';
 import GameResult from '@/components/GameResult/GameResult';
 import { Player, Turn } from '@/constants/game';
 import { GameSettingsContext } from '@/contexts/GameSettingContext';
@@ -47,9 +48,13 @@ const TicTacToe: React.FC = () => {
 
   return (
     <TicTacToeContext.Provider value={gameContextValue}>
-      <div className={`tic-tac-toe ${result?.gameOver ? 'game-over' : ''}`}>
-        <Board />
-        <GameResult result={result} />
+      <div className="tic-tac-toe">
+        <GameActions />
+
+        <div className={`board-wrapper ${result?.gameOver ? 'game-over' : ''}`}>
+          <Board />
+          <GameResult result={result} />
+        </div>
       </div>
     </TicTacToeContext.Provider>
   );

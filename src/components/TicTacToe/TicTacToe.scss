@@ -4,22 +4,31 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: toRem(100);
+  gap: toRem(16);
   flex-direction: column;
   position: relative;
 
-  &.game-over {
+  .board-wrapper {
+    height: fit-content;
+    width: fit-content;
     position: relative;
+    &.game-over {
+      position: relative;
 
-    &::after {
-      content: ' ';
-      height: 100%;
-      width: 100%;
-      background-color: $main-white-color;
-      opacity: 0.9;
-      position: absolute;
-      top: 0;
-      left: 0;
+      &::after {
+        content: ' ';
+        height: 100%;
+        width: 100%;
+        background-color: $main-white-color;
+        opacity: 0.9;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
     }
+  }
+
+  @include mobile {
+    gap: toRem(8);
   }
 }

@@ -1,0 +1,40 @@
+@import '@/assets/styles/global.scss';
+
+.home-actions {
+  padding-top: toRem(4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: toRem(14);
+  position: relative;
+  width: 100%;
+
+  .home-actions-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: toRem(40);
+    width: 60%;
+    max-width: 25vh;
+    font-size: toRem(18);
+    font-weight: 600;
+    border-radius: toRem(8);
+    @include select-restricted;
+    @include hover-shadow;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &.start {
+      background-color: $orange-color-1;
+      color: $main-white-color;
+    }
+
+    &.continue {
+      background-color: $orange-color-2;
+      color: $main-white-color;
+    }
+  }
+}
