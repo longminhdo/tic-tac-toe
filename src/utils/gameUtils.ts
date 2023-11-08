@@ -212,7 +212,7 @@ export const checkWinner = ({
   position: Position;
 }) => {
   if (isNull(position)) {
-    return { keepPlaying: true, isDraw: false, winPositions: [], winner: '' };
+    return { gameOver: false, isDraw: false, winPositions: [], winner: '' };
   }
 
   const {
@@ -226,7 +226,7 @@ export const checkWinner = ({
     winCondition,
   });
   if (isHWin) {
-    return { keepPlaying: false, isDraw: false, winPositions: hWinPositions, winner: hWinner };
+    return { gameOver: true, isDraw: false, winPositions: hWinPositions, winner: hWinner };
   }
 
   const {
@@ -240,7 +240,7 @@ export const checkWinner = ({
     winCondition,
   });
   if (isVWin) {
-    return { keepPlaying: false, isDraw: false, winPositions: vWinPositions, winner: vWinner };
+    return { gameOver: true, isDraw: false, winPositions: vWinPositions, winner: vWinner };
   }
 
   const {
@@ -254,7 +254,7 @@ export const checkWinner = ({
     winCondition,
   });
   if (isLdWin) {
-    return { keepPlaying: false, isDraw: false, winPositions: ldWinPositions, winner: ldWinner };
+    return { gameOver: true, isDraw: false, winPositions: ldWinPositions, winner: ldWinner };
   }
 
   const {
@@ -268,12 +268,12 @@ export const checkWinner = ({
     winCondition,
   });
   if (isRdWin) {
-    return { keepPlaying: false, isDraw: false, winPositions: rdWinPositions, winner: rdWinner };
+    return { gameOver: true, isDraw: false, winPositions: rdWinPositions, winner: rdWinner };
   }
 
   if (tiles.every((t) => t)) {
-    return { keepPlaying: false, isDraw: true, winPositions: [], winner: '' };
+    return { gameOver: true, isDraw: true, winPositions: [], winner: '' };
   }
 
-  return { keepPlaying: true, isDraw: false, winPositions: [], winner: '' };
+  return { gameOver: false, isDraw: false, winPositions: [], winner: '' };
 };

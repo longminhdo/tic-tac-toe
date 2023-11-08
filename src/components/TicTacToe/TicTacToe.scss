@@ -6,4 +6,20 @@
   align-items: center;
   gap: toRem(100);
   flex-direction: column;
+  position: relative;
+
+  &.game-over {
+    position: relative;
+
+    &::after {
+      content: ' ';
+      height: 100%;
+      width: 100%;
+      background-color: $main-white-color;
+      opacity: 0.9;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
 }

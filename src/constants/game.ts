@@ -23,7 +23,7 @@ export enum WinCondition {
 }
 
 export enum Result {
-  WIN = 'win',
-  LOSE = 'lose',
-  DRAW = 'draw',
+  WIN = 'Win',
+  LOSE = 'Lose',
+  DRAW = 'Draw',
 }

@@ -2,8 +2,11 @@
 
 .game-page {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  gap: toRem(100);
+  gap: toRem(140);
+
+  padding-top: $safe-margin-top-height;
+  height: $screen-height;
 }

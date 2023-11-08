@@ -1,5 +1,50 @@
 @use 'sass:math';
 
+:root {
+  --doc-height: 100%;
+}
+$screen-height: var(--doc-height);
+
+/********** FUNCTION **********/
+@mixin my-transition($time) {
+  //write CSS code here
+  -webkit-transition: all $time ease-in-out;
+  -moz-transition: all $time ease-in-out;
+  -o-transition: all $time ease-in-out;
+  -ms-transition: all $time ease-in-out;
+  transition: all $time ease-in-out;
+}
+
+@mixin select-restricted() {
+  /* Keyword values */
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+}
+
+@mixin hover-shadow {
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2), 0 0 0 0 rgba(0, 0, 0, 0.19);
+  transition: 0.3s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 0px 2px 0 rgba(74, 74, 74, 0.2), 0 0px 4px 2px rgba(94, 94, 94, 0.19);
+  }
+}
+
+@function toRem($value) {
+  $remValue: math.div($value, 16) + rem;
+
+  @return $remValue;
+}
+
+/********** CONSTANT **********/
+$safe-margin-top-height: toRem(64);
+
 /********** COLOR **********/
 $black-color-1: #2b2b2b;
 
@@ -52,41 +97,4 @@ $desktop-width: 1024px;
   @media (min-width: #{$desktop-width}) {
     @content;
   }
-}
-
-/********** FUNCTION **********/
-@mixin my-transition($time) {
-  //write CSS code here
-  -webkit-transition: all $time ease-in-out;
-  -moz-transition: all $time ease-in-out;
-  -o-transition: all $time ease-in-out;
-  -ms-transition: all $time ease-in-out;
-  transition: all $time ease-in-out;
-}
-
-@mixin select-restricted() {
-  /* Keyword values */
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* IE 10 and IE 11 */
-  user-select: none; /* Standard syntax */
-
-  -webkit-user-drag: none;
-  -khtml-user-drag: none;
-  -moz-user-drag: none;
-  -o-user-drag: none;
-}
-
-@mixin hover-shadow {
-  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2), 0 0 0 0 rgba(0, 0, 0, 0.19);
-  transition: 0.3s ease-in-out;
-
-  &:hover {
-    box-shadow: 0 0px 2px 0 rgba(74, 74, 74, 0.2), 0 0px 4px 2px rgba(94, 94, 94, 0.19);
-  }
-}
-
-@function toRem($value) {
-  $remValue: math.div($value, 16) + rem;
-
-  @return $remValue;
 }

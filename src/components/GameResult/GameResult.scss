@@ -1,0 +1,11 @@
+@import '@/assets/styles/global.scss';
+
+.game-result {
+  position: absolute;
+  z-index: 3;
+  font-size: 6vh;
+
+  @include mobile {
+    font-size: 10vw;
+  }
+}
