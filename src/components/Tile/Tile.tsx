@@ -11,7 +11,7 @@ export interface ITile {
 }
 
 const renderTileContent = ({ tile, turnIndex }) => {
-  if (tile === Mark.CROSS) {
+  if (tile === Mark.X) {
     return (
       <div className="tile-content">
         <Cross strokeWidth={2} size="80%" />
@@ -19,7 +19,7 @@ const renderTileContent = ({ tile, turnIndex }) => {
     );
   }
 
-  if (tile === Mark.NOUGHT) {
+  if (tile === Mark.O) {
     return (
       <div className="tile-content">
         <Circle strokeWidth={2} size="80%" />
@@ -60,9 +60,9 @@ const Tile: React.FC<ITile> = ({ tile, position, borderWidth }) => {
       const newTiles = [...prev];
 
       if (turnIndex === Turn.FIRST) {
-        newTiles[position] = Mark.CROSS;
+        newTiles[position] = Mark.X;
       } else {
-        newTiles[position] = Mark.NOUGHT;
+        newTiles[position] = Mark.O;
       }
 
       return newTiles;

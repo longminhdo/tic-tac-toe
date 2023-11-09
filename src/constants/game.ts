@@ -12,8 +12,8 @@ export enum GameSize {
 }
 
 export enum Mark {
-  CROSS = 'cross',
-  NOUGHT = 'nought',
+  X = 'x',
+  O = 'o',
 }
 
 export enum Turn {

@@ -3,7 +3,7 @@ import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } 
 import Board from '@/components/Board/Board';
 import GameActions from '@/components/GameActions/GameActions';
 import GameResult from '@/components/GameResult/GameResult';
-import { Player, Turn } from '@/constants/game';
+import { Turn } from '@/constants/game';
 import { GameSettingsContext } from '@/contexts/GameSettingContext';
 import { TicTacToeContext } from '@/contexts/TicTacToeContext';
 import { Position, Turn as TTurn, Tiles } from '@/types/ticTacToe';
@@ -14,7 +14,6 @@ const TicTacToe: React.FC = () => {
   const { size, winCondition } = useContext(GameSettingsContext);
 
   const [tiles, setTiles] = useState(() => Array(size * size).fill(null));
-  const [players, setPlayers] = useState(() => [Player.PLAYER_1, Player.PLAYER_2]);
   const [turnIndex, setTurnIndex] = useState<TTurn>(Turn.FIRST);
   const [lastPosition, setLastPosition] = useState<Position>(null);
   const [result, setResult] = useState<any>('');
@@ -43,8 +42,8 @@ const TicTacToe: React.FC = () => {
   }, [lastPosition, size, tiles, winCondition]);
 
   const gameContextValue = useMemo(
-    () => ({ lastPosition, size, tiles, players, turnIndex, setTiles, setPlayers, setTurnIndex, nextTurn, setLastPosition }),
-    [lastPosition, size, tiles, players, turnIndex, nextTurn, setLastPosition],
+    () => ({ lastPosition, size, tiles, turnIndex, setTiles, setTurnIndex, nextTurn, setLastPosition }),
+    [lastPosition, size, tiles, turnIndex, nextTurn, setLastPosition],
   );
 
   return (
