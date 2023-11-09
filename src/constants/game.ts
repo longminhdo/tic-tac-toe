@@ -64,3 +64,5 @@ export const GameMode = {
 };
 
 export const GameModes = ['PVP', 'PVC', 'CVP'];
+
+export const START_INDEX = 0;

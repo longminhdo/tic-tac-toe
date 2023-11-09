@@ -3,22 +3,21 @@ import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } 
 import Board from '@/components/Board/Board';
 import GameActions from '@/components/GameActions/GameActions';
 import GameResult from '@/components/GameResult/GameResult';
+import { START_INDEX } from '@/constants/game';
 import { GameSettingsContext } from '@/contexts/GameSettingContext';
 import { TicTacToeContext } from '@/contexts/TicTacToeContext';
 import { Logs, Position, Turn as TTurn, Tiles } from '@/types/ticTacToe';
-import { checkWinner, getInitialTiles } from '@/utils/gameUtils';
+import { checkWinner, getInitialLastPosition, getInitialLogs, getInitialTiles, getInitialTurnIndex } from '@/utils/gameUtils';
 import './TicTacToe.scss';
-
-const START_INDEX = 0;
 
 const TicTacToe: React.FC = () => {
   const { size, winCondition, players } = useContext(GameSettingsContext);
 
   const [tiles, setTiles] = useState(() => getInitialTiles(size));
-  const [turnIndex, setTurnIndex] = useState<TTurn>(START_INDEX);
-  const [lastPosition, setLastPosition] = useState<Position>(null);
+  const [turnIndex, setTurnIndex] = useState<TTurn>(() => getInitialTurnIndex());
+  const [lastPosition, setLastPosition] = useState<Position>(() => getInitialLastPosition());
+  const [logs, setLogs] = useState<Logs>(() => getInitialLogs());
   const [result, setResult] = useState<any>('');
-  const [logs, setLogs] = useState<Logs>([]);
 
   const tilesRef = useRef<Tiles>(getInitialTiles(size));
 

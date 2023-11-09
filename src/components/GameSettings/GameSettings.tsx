@@ -2,10 +2,8 @@ import { ChevronLeft, ChevronRight } from 'akar-icons';
 import { isEqual } from 'lodash';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { GameSettingsContext } from '@/contexts/GameSettingContext';
-import { GameMode, GameModes, GameOption, GameOptions } from '@/constants/game';
+import { GameMode, GameModes, GameOption, GameOptions, START_INDEX } from '@/constants/game';
 import './GameSettings.scss';
-
-const START_INDEX = 0;
 
 const getGameOption = (index) => {
   const gameOptionKey = GameOptions[index];

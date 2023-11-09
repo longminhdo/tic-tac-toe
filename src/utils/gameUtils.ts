@@ -1,4 +1,5 @@
 import { isEqual, isNull } from 'lodash';
+import { START_INDEX } from '@/constants/game';
 import { Position, Tiles } from '@/types/ticTacToe';
 
 const isOnLeftBorder = ({ position, size }) => {
@@ -289,3 +290,9 @@ export const getInitialTiles = (size) => {
 
   return Array(size * size).fill(null);
 };
+
+export const getInitialLogs = () => [];
+
+export const getInitialTurnIndex = () => START_INDEX;
+
+export const getInitialLastPosition = () => null;

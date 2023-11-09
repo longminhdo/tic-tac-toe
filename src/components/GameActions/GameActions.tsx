@@ -2,11 +2,14 @@ import { ArrowCounterClockwise, ArrowCycle } from 'akar-icons';
 import React, { useContext, useEffect, useState } from 'react';
 import { Breakpoints, IconButtonSize } from '@/constants/app';
 import { AppContext } from '@/contexts/AppContext';
+import { GameSettingsContext } from '@/contexts/GameSettingContext';
 import { TicTacToeContext } from '@/contexts/TicTacToeContext';
+import { getInitialLastPosition, getInitialLogs, getInitialTiles, getInitialTurnIndex } from '@/utils/gameUtils';
 import './GameActions.scss';
 
 const GameActions: React.FC = () => {
   const { windowWidth } = useContext(AppContext);
+  const { size } = useContext(GameSettingsContext);
   const { logs, setTiles, setLogs, setLastPosition, setTurnIndex } = useContext(TicTacToeContext);
 
   const [btnSize, setBtnSize] = useState<number>(() => (windowWidth > Breakpoints.MD ? IconButtonSize.DESKTOP : IconButtonSize.MOBILE));
@@ -53,17 +56,20 @@ const GameActions: React.FC = () => {
     });
   };
 
-  const handleReset = () => {
-    console.log('reset');
+  const handleRestart = () => {
+    setTiles(getInitialTiles(size));
+    setLogs(getInitialLogs);
+    setTurnIndex(getInitialTurnIndex());
+    setLastPosition(getInitialLastPosition());
   };
 
   return (
     <div className="game-actions">
-      <div className={`game-actions-btn ${logs.at(-1) ? '' : 'disabled'}`}>
-        <ArrowCounterClockwise strokeWidth={2} size={btnSize} onClick={handleUndo} />
+      <div className={`game-actions-btn ${logs.at(-1) ? '' : 'disabled'}`} onClick={handleUndo}>
+        <ArrowCounterClockwise strokeWidth={2} size={btnSize} />
       </div>
-      <div className="game-actions-btn">
-        <ArrowCycle strokeWidth={2} size={btnSize} onClick={handleReset} />
+      <div className="game-actions-btn" onClick={handleRestart}>
+        <ArrowCycle strokeWidth={2} size={btnSize} />
       </div>
     </div>
   );
