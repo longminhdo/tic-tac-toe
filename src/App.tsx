@@ -15,6 +15,7 @@ const App: React.FC = () => {
   const [players, setPlayers] = useState<Array<Player>>(() => [Player.PLAYER_1, Player.PLAYER_2]);
   const [windowWidth, setWindowWidth] = useState(() => window.innerWidth);
   const [theme, setTheme] = useState(() => Theme.LIGHT);
+  const [homeVisited, setHomeVisited] = useState<boolean>(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -50,15 +51,13 @@ const App: React.FC = () => {
           <Route
             path={routePaths.HOME}
             element={(
-              <HomePage />
+              <HomePage setVisited={setHomeVisited} />
             )}
           />
 
           <Route
             path={routePaths.GAME}
-            element={(
-              <GamePage />
-            )}
+            element={homeVisited ? (<GamePage />) : <Navigate to={routePaths.HOME} />}
           />
 
           <Route path="*" element={<NotFoundPage />} />

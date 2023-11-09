@@ -1,11 +1,11 @@
 import React from 'react';
 import './GameResult.scss';
 
-interface GameResultProps {
+interface IGameResult {
   result: any;
 }
 
-const GameResult: React.FC<GameResultProps> = ({ result }) => {
+const GameResult: React.FC<IGameResult> = ({ result }) => {
   const { gameOver } = result;
 
   if (!gameOver) {

@@ -4,7 +4,7 @@ import { Mark, Turn } from '@/constants/game';
 import { TicTacToeContext } from '@/contexts/TicTacToeContext';
 import './Tile.scss';
 
-export interface ITileProps {
+export interface ITile {
   tile: string | null;
   position: number;
   borderWidth?: number;
@@ -45,7 +45,7 @@ const renderWinnerStrikeClass = ({ position }) => {
   return strikeClass;
 };
 
-const Tile: React.FC<ITileProps> = ({ tile, position, borderWidth }) => {
+const Tile: React.FC<ITile> = ({ tile, position, borderWidth }) => {
   const { turnIndex, setTiles, nextTurn, setLastPosition } = useContext(TicTacToeContext);
 
   const handleTileClick = (e) => {

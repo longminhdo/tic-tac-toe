@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import TicTacToeImage from '@/assets/images/tic-tac-toe.png';
 import GameSettings from '@/components/GameSettings/GameSettings';
 import HomeActions from '@/components/HomeActions/HomeActions';
 import './HomePage.scss';
 
-const HomePage: React.FC = () => {
-  console.log('home page');
+interface IHomePage {
+  setVisited: any;
+}
+
+const HomePage: React.FC<IHomePage> = ({ setVisited }) => {
+  useEffect(() => {
+    setVisited(true);
+  }, [setVisited]);
+
   return (
     <div className="home-page">
       <div className="page-header">
