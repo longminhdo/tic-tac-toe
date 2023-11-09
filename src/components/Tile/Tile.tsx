@@ -46,7 +46,7 @@ const renderWinnerStrikeClass = ({ position }) => {
 };
 
 const Tile: React.FC<ITile> = ({ tile, position, borderWidth }) => {
-  const { turnIndex, setTiles, nextTurn, setLastPosition } = useContext(TicTacToeContext);
+  const { turnIndex, setTiles, nextTurn, setLastPosition, setLogs } = useContext(TicTacToeContext);
 
   const handleTileClick = (e) => {
     e.preventDefault();
@@ -58,7 +58,6 @@ const Tile: React.FC<ITile> = ({ tile, position, borderWidth }) => {
 
     setTiles(prev => {
       const newTiles = [...prev];
-
       if (turnIndex === Turn.FIRST) {
         newTiles[position] = Mark.X;
       } else {
@@ -68,6 +67,12 @@ const Tile: React.FC<ITile> = ({ tile, position, borderWidth }) => {
       return newTiles;
     });
     setLastPosition(position);
+    setLogs(prev => {
+      const newLogs = [...prev];
+      newLogs.push({ turnIndex, position });
+
+      return newLogs;
+    });
     nextTurn();
   };
 

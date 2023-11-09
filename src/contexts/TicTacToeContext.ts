@@ -8,4 +8,7 @@ export const TicTacToeContext = createContext<TicTacToe>({
   setTiles: () => undefined,
   nextTurn: () => undefined,
   setLastPosition: () => undefined,
+  logs: [],
+  setLogs: () => undefined,
+  setTurnIndex: () => undefined,
 });

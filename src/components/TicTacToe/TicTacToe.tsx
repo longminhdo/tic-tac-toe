@@ -3,32 +3,34 @@ import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } 
 import Board from '@/components/Board/Board';
 import GameActions from '@/components/GameActions/GameActions';
 import GameResult from '@/components/GameResult/GameResult';
-import { Turn } from '@/constants/game';
 import { GameSettingsContext } from '@/contexts/GameSettingContext';
 import { TicTacToeContext } from '@/contexts/TicTacToeContext';
-import { Position, Turn as TTurn, Tiles } from '@/types/ticTacToe';
-import { checkWinner } from '@/utils/gameUtils';
+import { Logs, Position, Turn as TTurn, Tiles } from '@/types/ticTacToe';
+import { checkWinner, getInitialTiles } from '@/utils/gameUtils';
 import './TicTacToe.scss';
 
-const TicTacToe: React.FC = () => {
-  const { size, winCondition } = useContext(GameSettingsContext);
+const START_INDEX = 0;
 
-  const [tiles, setTiles] = useState(() => Array(size * size).fill(null));
-  const [turnIndex, setTurnIndex] = useState<TTurn>(Turn.FIRST);
+const TicTacToe: React.FC = () => {
+  const { size, winCondition, players } = useContext(GameSettingsContext);
+
+  const [tiles, setTiles] = useState(() => getInitialTiles(size));
+  const [turnIndex, setTurnIndex] = useState<TTurn>(START_INDEX);
   const [lastPosition, setLastPosition] = useState<Position>(null);
   const [result, setResult] = useState<any>('');
+  const [logs, setLogs] = useState<Logs>([]);
 
-  const tilesRef = useRef<Tiles>(Array(size * size).fill(null));
+  const tilesRef = useRef<Tiles>(getInitialTiles(size));
 
   const nextTurn = useCallback(() => {
     setTurnIndex(prev => {
-      if (Turn.FIRST === prev) {
-        return Turn.SECOND;
+      if (prev === players.length - 1) {
+        return START_INDEX;
       }
 
-      return Turn.FIRST;
+      return ++prev;
     });
-  }, []);
+  }, [players.length]);
 
   useEffect(() => {
     if (isEqual(tilesRef.current, tiles)) {
@@ -42,8 +44,8 @@ const TicTacToe: React.FC = () => {
   }, [lastPosition, size, tiles, winCondition]);
 
   const gameContextValue = useMemo(
-    () => ({ lastPosition, size, tiles, turnIndex, setTiles, setTurnIndex, nextTurn, setLastPosition }),
-    [lastPosition, size, tiles, turnIndex, nextTurn, setLastPosition],
+    () => ({ logs, setLogs, lastPosition, size, tiles, turnIndex, setTiles, setTurnIndex, nextTurn, setLastPosition }),
+    [logs, lastPosition, size, tiles, turnIndex, nextTurn],
   );
 
   return (

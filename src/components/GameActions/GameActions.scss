@@ -18,6 +18,11 @@
     cursor: pointer;
     @include hover-shadow;
     @include select-restricted;
+
+    &.disabled {
+      cursor: not-allowed;
+      opacity: $disabled-opacity;
+    }
   }
 
   @include mobile {

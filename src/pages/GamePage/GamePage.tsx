@@ -7,8 +7,6 @@ import { routePaths } from '@/constants/routePaths';
 import { AppContext } from '@/contexts/AppContext';
 import './GamePage.scss';
 
-// TODO: Dynamic board game size
-
 const GamePage: React.FC = () => {
   const { windowWidth } = useContext(AppContext);
   const [btnSize, setBtnSize] = useState<number>(() => (windowWidth > Breakpoints.MD ? IconButtonSize.DESKTOP : IconButtonSize.MOBILE));

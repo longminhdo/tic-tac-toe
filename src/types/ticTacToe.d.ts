@@ -1,7 +1,9 @@
 export type Tile = string | null;
-export type Turn = 0 | 1;
+export type Turn = number;
 export type Tiles = Array<Tile>;
 export type Position = number | null;
+export type Log = { turnIndex: Turn; position: Position };
+export type Logs = Array<Log>;
 
 export type TicTacToe = {
   turnIndex: Turn;
@@ -10,4 +12,7 @@ export type TicTacToe = {
   nextTurn: any;
   lastPosition: Position;
   setLastPosition: any;
+  logs: Logs;
+  setLogs: any;
+  setTurnIndex: any;
 };

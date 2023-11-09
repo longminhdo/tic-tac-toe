@@ -211,6 +211,10 @@ export const checkWinner = ({
   winCondition: number;
   position: Position;
 }) => {
+  if (tiles.every((t) => !t)) {
+    return { gameOver: false, isDraw: false, winPositions: [], winner: '' };
+  }
+
   if (isNull(position)) {
     return { gameOver: false, isDraw: false, winPositions: [], winner: '' };
   }
@@ -276,4 +280,12 @@ export const checkWinner = ({
   }
 
   return { gameOver: false, isDraw: false, winPositions: [], winner: '' };
+};
+
+export const getInitialTiles = (size) => {
+  if (!size) {
+    return [];
+  }
+
+  return Array(size * size).fill(null);
 };
