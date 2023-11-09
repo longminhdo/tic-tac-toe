@@ -11,22 +11,6 @@
   user-select: none !important;
   -webkit-tap-highlight-color: transparent; /* iOS Safari */
 
-  &:nth-child(-n + 3) {
-    border-top-width: toRem(4);
-  }
-
-  &:nth-child(3n) {
-    border-right-width: toRem(4);
-  }
-
-  &:nth-child(3n - 2) {
-    border-left-width: toRem(4);
-  }
-
-  &:nth-child(n + 7) {
-    border-bottom-width: toRem(4);
-  }
-
   // TODO: winner strike css
   &.f-cross-r {
     &::after {

@@ -12,6 +12,7 @@ import './TicTacToe.scss';
 
 const TicTacToe: React.FC = () => {
   const { size, winCondition } = useContext(GameSettingsContext);
+
   const [tiles, setTiles] = useState(() => Array(size * size).fill(null));
   const [players, setPlayers] = useState(() => [Player.PLAYER_1, Player.PLAYER_2]);
   const [turnIndex, setTurnIndex] = useState<TTurn>(Turn.FIRST);

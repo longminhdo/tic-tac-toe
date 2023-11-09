@@ -7,6 +7,7 @@ import './Tile.scss';
 export interface ITileProps {
   tile: string | null;
   position: number;
+  borderWidth?: number;
 }
 
 const renderTileContent = ({ tile, turnIndex }) => {
@@ -44,7 +45,7 @@ const renderWinnerStrikeClass = ({ position }) => {
   return strikeClass;
 };
 
-const Tile: React.FC<ITileProps> = ({ tile, position }) => {
+const Tile: React.FC<ITileProps> = ({ tile, position, borderWidth }) => {
   const { turnIndex, setTiles, nextTurn, setLastPosition } = useContext(TicTacToeContext);
 
   const handleTileClick = (e) => {
@@ -71,7 +72,7 @@ const Tile: React.FC<ITileProps> = ({ tile, position }) => {
   };
 
   return (
-    <div className={`tile ${renderWinnerStrikeClass({ position })}`} onClick={handleTileClick}>
+    <div style={{ borderWidth }} className={`tile ${renderWinnerStrikeClass({ position })}`} onClick={handleTileClick}>
       {renderTileContent({ tile, turnIndex })}
     </div>
   );
