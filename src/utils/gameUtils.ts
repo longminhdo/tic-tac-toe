@@ -284,7 +284,7 @@ export const checkWinner = ({
   return { gameOver: false, isDraw: false, winPositions: [], winner: '' };
 };
 
-export const getSavedGame = ({ size, key = '', reset = false }: { size: number; key?: string; reset?: boolean }) => {
+export const getSavedGame = ({ key = '', reset = false }: { key?: string; reset?: boolean }) => {
   const savedTiles = getFromLocalStorage(key);
   if (reset || !key || !savedTiles) {
     return { tiles: undefined, turnIndex: undefined, lastPosition: undefined, logs: undefined };
@@ -294,7 +294,7 @@ export const getSavedGame = ({ size, key = '', reset = false }: { size: number; 
 };
 
 export const getInitialTiles = ({ size, key = '', reset = false }: { size: number; key?: string; reset?: boolean }) => {
-  const { tiles } = getSavedGame({ size, key, reset });
+  const { tiles } = getSavedGame({ key, reset });
   if (reset || !key || !tiles) {
     return Array(size * size).fill(null);
   }
@@ -302,8 +302,8 @@ export const getInitialTiles = ({ size, key = '', reset = false }: { size: numbe
   return tiles;
 };
 
-export const getInitialLogs = ({ size, key = '', reset = false }: { size: number; key?: string; reset?: boolean }) => {
-  const { logs } = getSavedGame({ size, key, reset });
+export const getInitialLogs = ({ key = '', reset = false }: { key?: string; reset?: boolean }) => {
+  const { logs } = getSavedGame({ key, reset });
   if (reset || !key || !logs) {
     return [];
   }
@@ -311,16 +311,8 @@ export const getInitialLogs = ({ size, key = '', reset = false }: { size: number
   return logs;
 };
 
-export const getInitialTurnIndex = ({
-  size,
-  key = '',
-  reset = false,
-}: {
-  size: number;
-  key?: string;
-  reset?: boolean;
-}) => {
-  const { turnIndex } = getSavedGame({ size, key, reset });
+export const getInitialTurnIndex = ({ key = '', reset = false }: { key?: string; reset?: boolean }) => {
+  const { turnIndex } = getSavedGame({ key, reset });
   if (reset || !key || !turnIndex) {
     return START_INDEX;
   }
@@ -328,16 +320,8 @@ export const getInitialTurnIndex = ({
   return turnIndex;
 };
 
-export const getInitialLastPosition = ({
-  size,
-  key = '',
-  reset = false,
-}: {
-  size: number;
-  key?: string;
-  reset?: boolean;
-}) => {
-  const { lastPosition } = getSavedGame({ size, key, reset });
+export const getInitialLastPosition = ({ key = '', reset = false }: { key?: string; reset?: boolean }) => {
+  const { lastPosition } = getSavedGame({ key, reset });
   if (reset || !key || !lastPosition) {
     return null;
   }

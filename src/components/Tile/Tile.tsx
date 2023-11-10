@@ -66,13 +66,16 @@ const Tile: React.FC<ITile> = ({ tile, position, borderWidth }) => {
 
       return newTiles;
     });
+
     setLastPosition(position);
+
     setLogs(prev => {
       const newLogs = [...prev];
       newLogs.push({ turnIndex, position });
 
       return newLogs;
     });
+
     nextTurn();
   };
 

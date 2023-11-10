@@ -7,22 +7,27 @@ import { START_INDEX } from '@/constants/game';
 import { GameSettingsContext } from '@/contexts/GameSettingContext';
 import { TicTacToeContext } from '@/contexts/TicTacToeContext';
 import { Logs, Position, Turn as TTurn, Tiles } from '@/types/ticTacToe';
-import { checkWinner, getGameLocalStorageKey, getInitialLastPosition, getInitialLogs, getInitialTiles, getInitialTurnIndex } from '@/utils/gameUtils';
+import { checkWinner, getGameLocalStorageKey, getInitialLastPosition, getInitialLogs, getInitialTiles, getInitialTurnIndex, getSavedGame } from '@/utils/gameUtils';
 import './TicTacToe.scss';
 
 const TicTacToe: React.FC = () => {
   const { size, winCondition, players } = useContext(GameSettingsContext);
 
   const [tiles, setTiles] = useState(() => getInitialTiles({ size, key: getGameLocalStorageKey({ size, winCondition, players }) }));
-  const [turnIndex, setTurnIndex] = useState<TTurn>(() => getInitialTurnIndex({ size, key: getGameLocalStorageKey({ size, winCondition, players }) }));
-  const [lastPosition, setLastPosition] = useState<Position>(() => getInitialLastPosition({
-    size,
-    key: getGameLocalStorageKey({ size, winCondition, players }),
-  }));
-  const [logs, setLogs] = useState<Logs>(() => getInitialLogs({ size, key: getGameLocalStorageKey({ size, winCondition, players }) }));
-  const [result, setResult] = useState<any>('');
+  const [turnIndex, setTurnIndex] = useState<TTurn>(() => getInitialTurnIndex({ key: getGameLocalStorageKey({ size, winCondition, players }) }));
+  const [lastPosition, setLastPosition] = useState<Position>(() => getInitialLastPosition({ key: getGameLocalStorageKey({ size, winCondition, players }) }));
+  const [logs, setLogs] = useState<Logs>(() => getInitialLogs({ key: getGameLocalStorageKey({ size, winCondition, players }) }));
+  const [result, setResult] = useState<any>(() => checkWinner(
+    {
+      size,
+      winCondition,
+      tiles: getInitialTiles({ size, key: getGameLocalStorageKey({ size, winCondition, players }) }),
+      position: getInitialLastPosition({ key: getGameLocalStorageKey({ size, winCondition, players }) }),
+    },
+  ));
 
   const tilesRef = useRef<Tiles>(getInitialTiles({ size, key: getGameLocalStorageKey({ size, winCondition, players }) }));
+  const lastPositionRef = useRef<Position>(getInitialLastPosition({ key: getGameLocalStorageKey({ size, winCondition, players }) }));
   const debounce = useRef<any>();
 
   const nextTurn = useCallback(() => {
@@ -36,11 +41,12 @@ const TicTacToe: React.FC = () => {
   }, [players.length]);
 
   useEffect(() => {
-    if (isEqual(tilesRef.current, tiles)) {
+    if (isEqual(tilesRef.current, tiles) && isEqual(lastPositionRef.current, lastPosition)) {
       return;
     }
 
     tilesRef.current = [...tiles];
+    lastPositionRef.current = lastPosition;
     const result = checkWinner({ tiles, winCondition, size, position: lastPosition });
 
     setResult(result);

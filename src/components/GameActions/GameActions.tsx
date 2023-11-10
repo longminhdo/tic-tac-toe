@@ -36,18 +36,18 @@ const GameActions: React.FC = () => {
           const newTiles = [...prev];
           newTiles[prevPosition] = null;
 
+          if (prevTurnIndex || prevTurnIndex === 0) {
+            setTurnIndex(prevTurnIndex);
+          }
+
+          if (beforeLastMove?.position || beforeLastMove.position === 0) {
+            setLastPosition(beforeLastMove.position);
+          } else {
+            setLastPosition(null);
+          }
+
           return newTiles;
         });
-      }
-
-      if (prevTurnIndex || prevTurnIndex === 0) {
-        setTurnIndex(prevTurnIndex);
-      }
-
-      if (beforeLastMove) {
-        setLastPosition(beforeLastMove.position);
-      } else {
-        setLastPosition(null);
       }
 
       newLogs.pop();
@@ -58,9 +58,9 @@ const GameActions: React.FC = () => {
 
   const handleRestart = () => {
     setTiles(getInitialTiles({ size, reset: true }));
-    setLogs(getInitialLogs({ size, reset: true }));
-    setTurnIndex(getInitialTurnIndex({ size, reset: true }));
-    setLastPosition(getInitialLastPosition({ size, reset: true }));
+    setLogs(getInitialLogs({ reset: true }));
+    setTurnIndex(getInitialTurnIndex({ reset: true }));
+    setLastPosition(getInitialLastPosition({ reset: true }));
   };
 
   return (
