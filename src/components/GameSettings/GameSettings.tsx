@@ -38,13 +38,13 @@ const renderModeOption = (modeIndex) => {
 };
 
 const GameSettings: React.FC = () => {
+  const { setPlayers, setSize, setWinCondition } = useContext(GameSettingsContext);
+
   const [optionIndex, setOptionIndex] = useState<number>(START_INDEX);
   const [modeIndex, setMode] = useState<number>(START_INDEX);
 
   const optionIndexRef = useRef<number>();
   const modeIndexRef = useRef<number>();
-
-  const { setPlayers, setSize, setWinCondition } = useContext(GameSettingsContext);
 
   const handleNextOption = () => {
     setOptionIndex(prev => {

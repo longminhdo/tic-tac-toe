@@ -4,6 +4,8 @@ import { Mark, Turn } from '@/constants/game';
 import { TicTacToeContext } from '@/contexts/TicTacToeContext';
 import './Tile.scss';
 
+const WIN_TILE_CLASS = 'win-tile';
+
 export interface ITile {
   tile: string | null;
   position: number;
@@ -38,15 +40,18 @@ const renderTileContent = ({ tile, turnIndex }) => {
   );
 };
 
-// TODO: render winner strike
-const renderWinnerStrikeClass = ({ position }) => {
-  const strikeClass = '';
+const renderWinnerStrikeClass = ({ position, result }) => {
+  const { winPositions, winType } = result;
 
-  return strikeClass;
+  if (winPositions.includes(position)) {
+    return `${winType} ${WIN_TILE_CLASS}`;
+  }
+
+  return '';
 };
 
 const Tile: React.FC<ITile> = ({ tile, position, borderWidth }) => {
-  const { turnIndex, setTiles, nextTurn, setLastPosition, setLogs } = useContext(TicTacToeContext);
+  const { result, turnIndex, setTiles, nextTurn, setLastPosition, setLogs } = useContext(TicTacToeContext);
 
   const handleTileClick = (e) => {
     e.preventDefault();
@@ -80,7 +85,7 @@ const Tile: React.FC<ITile> = ({ tile, position, borderWidth }) => {
   };
 
   return (
-    <div style={{ borderWidth }} className={`tile ${renderWinnerStrikeClass({ position })}`} onClick={handleTileClick}>
+    <div style={{ borderWidth }} className={`tile ${renderWinnerStrikeClass({ position, result })}`} onClick={handleTileClick}>
       {renderTileContent({ tile, turnIndex })}
     </div>
   );

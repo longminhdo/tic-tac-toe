@@ -1,5 +1,5 @@
 import { isEqual, isNull } from 'lodash';
-import { START_INDEX } from '@/constants/game';
+import { START_INDEX, WinType } from '@/constants/game';
 import { Position, Tiles } from '@/types/ticTacToe';
 import { getFromLocalStorage } from '@/utils/utils';
 
@@ -202,6 +202,8 @@ const checkRightDiagonal = ({ position, tiles, size, winCondition }) => {
   return { isWin: winPositions.length === winCondition, winPositions, winner: currentTile };
 };
 
+const keepPlayingResult = { gameOver: false, isDraw: false, winPositions: [], winner: '', winType: '' };
+
 export const checkWinner = ({
   tiles,
   size,
@@ -214,11 +216,11 @@ export const checkWinner = ({
   position: Position;
 }) => {
   if (tiles.every((t) => !t)) {
-    return { gameOver: false, isDraw: false, winPositions: [], winner: '' };
+    return keepPlayingResult;
   }
 
   if (isNull(position)) {
-    return { gameOver: false, isDraw: false, winPositions: [], winner: '' };
+    return keepPlayingResult;
   }
 
   const {
@@ -232,7 +234,7 @@ export const checkWinner = ({
     winCondition,
   });
   if (isHWin) {
-    return { gameOver: true, isDraw: false, winPositions: hWinPositions, winner: hWinner };
+    return { gameOver: true, isDraw: false, winPositions: hWinPositions, winner: hWinner, winType: WinType.HORIZONTAL };
   }
 
   const {
@@ -246,7 +248,7 @@ export const checkWinner = ({
     winCondition,
   });
   if (isVWin) {
-    return { gameOver: true, isDraw: false, winPositions: vWinPositions, winner: vWinner };
+    return { gameOver: true, isDraw: false, winPositions: vWinPositions, winner: vWinner, winType: WinType.VERTICAL };
   }
 
   const {
@@ -260,7 +262,13 @@ export const checkWinner = ({
     winCondition,
   });
   if (isLdWin) {
-    return { gameOver: true, isDraw: false, winPositions: ldWinPositions, winner: ldWinner };
+    return {
+      gameOver: true,
+      isDraw: false,
+      winPositions: ldWinPositions,
+      winner: ldWinner,
+      winType: WinType.LEFT_DIAGONAL,
+    };
   }
 
   const {
@@ -274,14 +282,20 @@ export const checkWinner = ({
     winCondition,
   });
   if (isRdWin) {
-    return { gameOver: true, isDraw: false, winPositions: rdWinPositions, winner: rdWinner };
+    return {
+      gameOver: true,
+      isDraw: false,
+      winPositions: rdWinPositions,
+      winner: rdWinner,
+      winType: WinType.RIGHT_DIAGONAL,
+    };
   }
 
   if (tiles.every((t) => t)) {
-    return { gameOver: true, isDraw: true, winPositions: [], winner: '' };
+    return { gameOver: true, isDraw: true, winPositions: [], winner: '', winType: '' };
   }
 
-  return { gameOver: false, isDraw: false, winPositions: [], winner: '' };
+  return keepPlayingResult;
 };
 
 export const getSavedGame = ({ key = '', reset = false }: { key?: string; reset?: boolean }) => {

@@ -6,8 +6,8 @@ import GameResult from '@/components/GameResult/GameResult';
 import { START_INDEX } from '@/constants/game';
 import { GameSettingsContext } from '@/contexts/GameSettingContext';
 import { TicTacToeContext } from '@/contexts/TicTacToeContext';
-import { Logs, Position, Turn as TTurn, Tiles } from '@/types/ticTacToe';
-import { checkWinner, getGameLocalStorageKey, getInitialLastPosition, getInitialLogs, getInitialTiles, getInitialTurnIndex, getSavedGame } from '@/utils/gameUtils';
+import { Logs, Position, Result, Turn as TTurn, Tiles } from '@/types/ticTacToe';
+import { checkWinner, getGameLocalStorageKey, getInitialLastPosition, getInitialLogs, getInitialTiles, getInitialTurnIndex } from '@/utils/gameUtils';
 import './TicTacToe.scss';
 
 const TicTacToe: React.FC = () => {
@@ -17,7 +17,7 @@ const TicTacToe: React.FC = () => {
   const [turnIndex, setTurnIndex] = useState<TTurn>(() => getInitialTurnIndex({ key: getGameLocalStorageKey({ size, winCondition, players }) }));
   const [lastPosition, setLastPosition] = useState<Position>(() => getInitialLastPosition({ key: getGameLocalStorageKey({ size, winCondition, players }) }));
   const [logs, setLogs] = useState<Logs>(() => getInitialLogs({ key: getGameLocalStorageKey({ size, winCondition, players }) }));
-  const [result, setResult] = useState<any>(() => checkWinner(
+  const [result, setResult] = useState<Result>(() => checkWinner(
     {
       size,
       winCondition,
@@ -75,8 +75,8 @@ const TicTacToe: React.FC = () => {
   }, [lastPosition, logs, players, size, tiles, turnIndex, winCondition]);
 
   const gameContextValue = useMemo(
-    () => ({ logs, setLogs, lastPosition, size, tiles, turnIndex, setTiles, setTurnIndex, nextTurn, setLastPosition }),
-    [logs, lastPosition, size, tiles, turnIndex, nextTurn],
+    () => ({ result, logs, setLogs, lastPosition, size, tiles, turnIndex, setTiles, setTurnIndex, nextTurn, setLastPosition }),
+    [result, logs, lastPosition, size, tiles, turnIndex, nextTurn],
   );
 
   return (

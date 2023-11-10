@@ -16,6 +16,11 @@ export enum Mark {
   O = 'o',
 }
 
+export enum MarkTurnMapping {
+  x = 0,
+  o = 1,
+}
+
 export enum Turn {
   FIRST = 0,
   SECOND = 1,
@@ -66,3 +71,10 @@ export const GameMode = {
 export const GameModes = ['PVP', 'PVC', 'CVP'];
 
 export const START_INDEX = 0;
+
+export enum WinType {
+  HORIZONTAL = 'h-win',
+  VERTICAL = 'r-win',
+  LEFT_DIAGONAL = 'ld-win',
+  RIGHT_DIAGONAL = 'rd-win',
+}

@@ -11,4 +11,5 @@ export const TicTacToeContext = createContext<TicTacToe>({
   logs: [],
   setLogs: () => undefined,
   setTurnIndex: () => undefined,
+  result: { gameOver: false, isDraw: false, winPositions: [], winner: '', winType: '' },
 });

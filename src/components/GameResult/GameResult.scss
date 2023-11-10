@@ -8,6 +8,21 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: max-content;
+  display: flex;
+  flex-direction: column;
+  gap: toRem(8);
+  align-items: center;
+  justify-content: center;
+
+  .game-over-text {
+    font-weight: 600;
+    color: $orange-color-1;
+  }
+
+  .win-player-text {
+    font-size: toRem(36);
+    font-style: italic;
+  }
 
   @include mobile {
     font-size: 10vw;
