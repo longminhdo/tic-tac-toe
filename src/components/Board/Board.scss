@@ -7,6 +7,6 @@
   max-width: toRem(480);
   max-height: toRem(480);
   grid-auto-rows: 1fr;
-  border: toRem(1) solid $main-black-color;
+  border: toRem(2) solid $main-black-color;
   @include select-restricted;
 }

@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
-const Dotenv = require('dotenv-webpack');
-const { DefinePlugin } = require('webpack');
 
 const alias = {
   '@': 'src',
