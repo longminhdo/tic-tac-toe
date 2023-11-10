@@ -8,10 +8,14 @@ interface IGameResult {
   result: any;
 }
 
-const renderWinner = ({ winner, players }) => {
+const renderResultContent = ({ winner, players }) => {
   const player = players[MarkTurnMapping[winner]];
 
-  return player;
+  if (!player) {
+    return 'Draw';
+  }
+
+  return `${player} win`;
 };
 
 const GameResult: React.FC<IGameResult> = ({ result }: { result: Result }) => {
@@ -25,10 +29,8 @@ const GameResult: React.FC<IGameResult> = ({ result }: { result: Result }) => {
   return (
     <div className="game-result">
       <span className="game-over-text">Game Over</span>
-      <span className="win-player-text">
-        {renderWinner({ winner, players })}
-        {' '}
-        win
+      <span className="game-result-content">
+        {renderResultContent({ winner, players })}
       </span>
     </div>
   );

@@ -4,7 +4,7 @@
   position: absolute;
   z-index: 3;
   font-size: 6vh;
-  top: 50%;
+  top: 47%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: max-content;
@@ -19,7 +19,7 @@
     color: $orange-color-1;
   }
 
-  .win-player-text {
+  .game-result-content {
     font-size: toRem(36);
     font-style: italic;
   }
