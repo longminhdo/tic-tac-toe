@@ -2,13 +2,13 @@
 
 .game-page {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   width: 90vw;
   max-width: toRem(480);
   margin: auto;
-  padding-bottom: toRem(200);
+  gap: toRem(90);
   padding-top: toRem(60);
   height: $screen-height;
 
@@ -56,7 +56,5 @@
         font-size: toRem(36);
       }
     }
-
-    padding-bottom: toRem(80);
   }
 }
