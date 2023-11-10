@@ -7,19 +7,23 @@ import { START_INDEX } from '@/constants/game';
 import { GameSettingsContext } from '@/contexts/GameSettingContext';
 import { TicTacToeContext } from '@/contexts/TicTacToeContext';
 import { Logs, Position, Turn as TTurn, Tiles } from '@/types/ticTacToe';
-import { checkWinner, getInitialLastPosition, getInitialLogs, getInitialTiles, getInitialTurnIndex } from '@/utils/gameUtils';
+import { checkWinner, getGameLocalStorageKey, getInitialLastPosition, getInitialLogs, getInitialTiles, getInitialTurnIndex } from '@/utils/gameUtils';
 import './TicTacToe.scss';
 
 const TicTacToe: React.FC = () => {
   const { size, winCondition, players } = useContext(GameSettingsContext);
 
-  const [tiles, setTiles] = useState(() => getInitialTiles(size));
-  const [turnIndex, setTurnIndex] = useState<TTurn>(() => getInitialTurnIndex());
-  const [lastPosition, setLastPosition] = useState<Position>(() => getInitialLastPosition());
-  const [logs, setLogs] = useState<Logs>(() => getInitialLogs());
+  const [tiles, setTiles] = useState(() => getInitialTiles({ size, key: getGameLocalStorageKey({ size, winCondition, players }) }));
+  const [turnIndex, setTurnIndex] = useState<TTurn>(() => getInitialTurnIndex({ size, key: getGameLocalStorageKey({ size, winCondition, players }) }));
+  const [lastPosition, setLastPosition] = useState<Position>(() => getInitialLastPosition({
+    size,
+    key: getGameLocalStorageKey({ size, winCondition, players }),
+  }));
+  const [logs, setLogs] = useState<Logs>(() => getInitialLogs({ size, key: getGameLocalStorageKey({ size, winCondition, players }) }));
   const [result, setResult] = useState<any>('');
 
-  const tilesRef = useRef<Tiles>(getInitialTiles(size));
+  const tilesRef = useRef<Tiles>(getInitialTiles({ size, key: getGameLocalStorageKey({ size, winCondition, players }) }));
+  const debounce = useRef<any>();
 
   const nextTurn = useCallback(() => {
     setTurnIndex(prev => {
@@ -41,6 +45,28 @@ const TicTacToe: React.FC = () => {
 
     setResult(result);
   }, [lastPosition, size, tiles, winCondition]);
+
+  useEffect(() => {
+
+  }, [players, size, winCondition, tiles, turnIndex, lastPosition, logs]);
+
+
+  useEffect(() => {
+    (() => {
+      clearTimeout(debounce.current);
+
+      debounce.current = setTimeout(async () => {
+        const gameLocalStorageKey = getGameLocalStorageKey({ size, winCondition, players });
+
+        if (tiles.every(t => !t)) {
+          localStorage.removeItem(gameLocalStorageKey);
+          return;
+        }
+
+        localStorage.setItem(gameLocalStorageKey, JSON.stringify({ tiles, turnIndex, lastPosition, logs }));
+      }, 200);
+    })();
+  }, [lastPosition, logs, players, size, tiles, turnIndex, winCondition]);
 
   const gameContextValue = useMemo(
     () => ({ logs, setLogs, lastPosition, size, tiles, turnIndex, setTiles, setTurnIndex, nextTurn, setLastPosition }),

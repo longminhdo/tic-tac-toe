@@ -1,6 +1,7 @@
 import { isEqual, isNull } from 'lodash';
 import { START_INDEX } from '@/constants/game';
 import { Position, Tiles } from '@/types/ticTacToe';
+import { getFromLocalStorage } from '@/utils/utils';
 
 const isOnLeftBorder = ({ position, size }) => {
   const col = position % size;
@@ -283,16 +284,70 @@ export const checkWinner = ({
   return { gameOver: false, isDraw: false, winPositions: [], winner: '' };
 };
 
-export const getInitialTiles = (size) => {
-  if (!size) {
+export const getSavedGame = ({ size, key = '', reset = false }: { size: number; key?: string; reset?: boolean }) => {
+  const savedTiles = getFromLocalStorage(key);
+  if (reset || !key || !savedTiles) {
+    return { tiles: undefined, turnIndex: undefined, lastPosition: undefined, logs: undefined };
+  }
+
+  return savedTiles;
+};
+
+export const getInitialTiles = ({ size, key = '', reset = false }: { size: number; key?: string; reset?: boolean }) => {
+  const { tiles } = getSavedGame({ size, key, reset });
+  if (reset || !key || !tiles) {
+    return Array(size * size).fill(null);
+  }
+
+  return tiles;
+};
+
+export const getInitialLogs = ({ size, key = '', reset = false }: { size: number; key?: string; reset?: boolean }) => {
+  const { logs } = getSavedGame({ size, key, reset });
+  if (reset || !key || !logs) {
     return [];
   }
 
-  return Array(size * size).fill(null);
+  return logs;
 };
 
-export const getInitialLogs = () => [];
+export const getInitialTurnIndex = ({
+  size,
+  key = '',
+  reset = false,
+}: {
+  size: number;
+  key?: string;
+  reset?: boolean;
+}) => {
+  const { turnIndex } = getSavedGame({ size, key, reset });
+  if (reset || !key || !turnIndex) {
+    return START_INDEX;
+  }
 
-export const getInitialTurnIndex = () => START_INDEX;
+  return turnIndex;
+};
 
-export const getInitialLastPosition = () => null;
+export const getInitialLastPosition = ({
+  size,
+  key = '',
+  reset = false,
+}: {
+  size: number;
+  key?: string;
+  reset?: boolean;
+}) => {
+  const { lastPosition } = getSavedGame({ size, key, reset });
+  if (reset || !key || !lastPosition) {
+    return null;
+  }
+
+  return lastPosition;
+};
+export const getGameLocalStorageKey = ({ size, winCondition, players }) => {
+  if (!size || !winCondition || !players) {
+    return '';
+  }
+
+  return `${size}_${winCondition}_${players.join('').replace(/\s/g, '_')}`;
+};

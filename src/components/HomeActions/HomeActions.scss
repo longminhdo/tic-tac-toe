@@ -36,5 +36,10 @@
       background-color: $orange-color-2;
       color: $main-white-color;
     }
+
+    &.disabled {
+      cursor: not-allowed;
+      opacity: $disabled-opacity;
+    }
   }
 }

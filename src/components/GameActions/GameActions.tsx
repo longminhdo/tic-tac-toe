@@ -57,10 +57,10 @@ const GameActions: React.FC = () => {
   };
 
   const handleRestart = () => {
-    setTiles(getInitialTiles(size));
-    setLogs(getInitialLogs);
-    setTurnIndex(getInitialTurnIndex());
-    setLastPosition(getInitialLastPosition());
+    setTiles(getInitialTiles({ size, reset: true }));
+    setLogs(getInitialLogs({ size, reset: true }));
+    setTurnIndex(getInitialTurnIndex({ size, reset: true }));
+    setLastPosition(getInitialLastPosition({ size, reset: true }));
   };
 
   return (
